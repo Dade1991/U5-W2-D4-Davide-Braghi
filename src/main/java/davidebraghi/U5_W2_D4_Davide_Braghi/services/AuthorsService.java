@@ -1,9 +1,9 @@
-package davidebraghi.U5_W2_D4_Davide_Braghi;
+package davidebraghi.U5_W2_D4_Davide_Braghi.services;
 
-import epicode.u5d8hw.entities.Author;
-import epicode.u5d8hw.exceptions.BadRequestException;
-import epicode.u5d8hw.exceptions.NotFoundException;
-import epicode.u5d8hw.repositories.AuthorsRepository;
+import davidebraghi.U5_W2_D4_Davide_Braghi.entities.Author;
+import davidebraghi.U5_W2_D4_Davide_Braghi.exceptions.BadRequestException;
+import davidebraghi.U5_W2_D4_Davide_Braghi.exceptions.NotFoundException;
+import davidebraghi.U5_W2_D4_Davide_Braghi.repositories.AuthorsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

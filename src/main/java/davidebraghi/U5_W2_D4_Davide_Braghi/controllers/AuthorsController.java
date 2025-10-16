@@ -1,7 +1,7 @@
-package davidebraghi.U5_W2_D4_Davide_Braghi;
+package davidebraghi.U5_W2_D4_Davide_Braghi.controllers;
 
-import epicode.u5d8hw.entities.Author;
-import epicode.u5d8hw.services.AuthorsService;
+import davidebraghi.U5_W2_D4_Davide_Braghi.entities.Author;
+import davidebraghi.U5_W2_D4_Davide_Braghi.services.AuthorsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -29,13 +29,13 @@ public class AuthorsController {
 
     // 3. - GET http://localhost:3001/authors/{id}
     @GetMapping("/{authorId}")
-    public Author findById(@PathVariable int authorId){
+    public Author findById(@PathVariable int authorId) {
         return authorsService.findById(authorId);
     }
 
     // 4. - PUT http://localhost:3001/authors/{id} (+ req.body)
     @PutMapping("/{authorId}")
-    public Author findAndUpdate(@PathVariable int authorId, @RequestBody Author body){
+    public Author findAndUpdate(@PathVariable int authorId, @RequestBody Author body) {
         return authorsService.findByIdAndUpdate(authorId, body);
     }
 

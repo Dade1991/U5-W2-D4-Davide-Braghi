@@ -1,4 +1,4 @@
-package davidebraghi.U5_W2_D4_Davide_Braghi;
+package davidebraghi.U5_W2_D4_Davide_Braghi.payloads;
 
 import lombok.Getter;
 

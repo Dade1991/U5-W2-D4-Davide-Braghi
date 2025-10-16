@@ -1,9 +1,8 @@
-package davidebraghi.U5_W2_D4_Davide_Braghi;
+package davidebraghi.U5_W2_D4_Davide_Braghi.controllers;
 
-import epicode.u5d8hw.entities.Blogpost;
-import epicode.u5d8hw.exceptions.NotFoundException;
-import epicode.u5d8hw.payloads.NewBlogPostPayload;
-import epicode.u5d8hw.services.BlogsService;
+import davidebraghi.U5_W2_D4_Davide_Braghi.entities.Blogpost;
+import davidebraghi.U5_W2_D4_Davide_Braghi.payloads.NewBlogPostPayload;
+import davidebraghi.U5_W2_D4_Davide_Braghi.services.BlogsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +25,7 @@ public class BlogsController {
     // 2. - GET http://localhost:3001/blogs
     @GetMapping("")
     public List<Blogpost> getBlogs(@RequestParam(required = false) Integer authorId) {
-        if(authorId != null) return blogsService.findByAuthor(authorId);
+        if (authorId != null) return blogsService.findByAuthor(authorId);
         else return blogsService.getBlogs();
     }
 

@@ -1,15 +1,9 @@
-package davidebraghi.U5_W2_D4_Davide_Braghi;
+package davidebraghi.U5_W2_D4_Davide_Braghi.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter

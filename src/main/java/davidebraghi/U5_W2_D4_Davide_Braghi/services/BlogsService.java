@@ -1,15 +1,14 @@
-package davidebraghi.U5_W2_D4_Davide_Braghi;
+package davidebraghi.U5_W2_D4_Davide_Braghi.services;
 
-import epicode.u5d8hw.entities.Author;
-import epicode.u5d8hw.entities.Blogpost;
-import epicode.u5d8hw.exceptions.NotFoundException;
-import epicode.u5d8hw.payloads.NewBlogPostPayload;
-import epicode.u5d8hw.repositories.AuthorsRepository;
-import epicode.u5d8hw.repositories.BlogsRepository;
+import davidebraghi.U5_W2_D4_Davide_Braghi.entities.Author;
+import davidebraghi.U5_W2_D4_Davide_Braghi.entities.Blogpost;
+import davidebraghi.U5_W2_D4_Davide_Braghi.exceptions.NotFoundException;
+import davidebraghi.U5_W2_D4_Davide_Braghi.payloads.NewBlogPostPayload;
+import davidebraghi.U5_W2_D4_Davide_Braghi.repositories.BlogsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
 
 @Service
 public class BlogsService {
@@ -51,7 +50,7 @@ public class BlogsService {
         found.setTitle(body.getTitle());
         found.setCategory(body.getCategory());
 
-        if(found.getAuthor().getId()!= body.getAuthorId()) {
+        if (found.getAuthor().getId() != body.getAuthorId()) {
             Author newAuthor = authorsService.findById(body.getAuthorId());
             found.setAuthor(newAuthor);
         }
@@ -59,7 +58,7 @@ public class BlogsService {
         return blogsRepository.save(found);
     }
 
-    public List<Blogpost> findByAuthor(int authorId){
+    public List<Blogpost> findByAuthor(int authorId) {
         Author author = authorsService.findById(authorId);
         return blogsRepository.findByAuthor(author);
     }

@@ -1,12 +1,11 @@
-package davidebraghi.U5_W2_D4_Davide_Braghi;
+package davidebraghi.U5_W2_D4_Davide_Braghi.repositories;
 
-import epicode.u5d8hw.entities.Author;
-import epicode.u5d8hw.entities.Blogpost;
+import davidebraghi.U5_W2_D4_Davide_Braghi.entities.Author;
+import davidebraghi.U5_W2_D4_Davide_Braghi.entities.Blogpost;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.UUID;
 
 @Repository
 public interface BlogsRepository extends JpaRepository<Blogpost, Integer> {
