@@ -1,6 +1,7 @@
 package davidebraghi.U5_W2_D4_Davide_Braghi.controllers;
 
 import davidebraghi.U5_W2_D4_Davide_Braghi.entities.Blogpost;
+import davidebraghi.U5_W2_D4_Davide_Braghi.payloads.NewBlogPostDTO;
 import davidebraghi.U5_W2_D4_Davide_Braghi.payloads.NewBlogPostPayload;
 import davidebraghi.U5_W2_D4_Davide_Braghi.services.BlogsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class BlogsController {
     // 1. - POST http://localhost:3001/blogs (+ req.body)
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED) // <-- 201
-    public Blogpost saveBlog(@RequestBody NewBlogPostPayload body) {
+    public Blogpost saveBlog(@RequestBody NewBlogPostDTO body) {
         return blogsService.save(body);
     }
 

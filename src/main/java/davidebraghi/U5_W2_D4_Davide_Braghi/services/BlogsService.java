@@ -3,6 +3,7 @@ package davidebraghi.U5_W2_D4_Davide_Braghi.services;
 import davidebraghi.U5_W2_D4_Davide_Braghi.entities.Author;
 import davidebraghi.U5_W2_D4_Davide_Braghi.entities.Blogpost;
 import davidebraghi.U5_W2_D4_Davide_Braghi.exceptions.NotFoundException;
+import davidebraghi.U5_W2_D4_Davide_Braghi.payloads.NewBlogPostDTO;
 import davidebraghi.U5_W2_D4_Davide_Braghi.payloads.NewBlogPostPayload;
 import davidebraghi.U5_W2_D4_Davide_Braghi.repositories.BlogsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +18,14 @@ public class BlogsService {
     @Autowired
     private AuthorsService authorsService;
 
-    public Blogpost save(NewBlogPostPayload body) {
-        Author author = authorsService.findById(body.getAuthorId());
+    public Blogpost save(NewBlogPostDTO body) {
+        Author author = authorsService.findById(body.authorId());
         Blogpost newBlogPost = new Blogpost();
-        newBlogPost.setReadingTime(body.getReadingTime());
-        newBlogPost.setContent(body.getContent());
-        newBlogPost.setTitle(body.getTitle());
+        newBlogPost.setReadingTime(body.readingTime());
+        newBlogPost.setContent(body.content());
+        newBlogPost.setTitle(body.title());
         newBlogPost.setAuthor(author);
-        newBlogPost.setCategory(body.getCategory());
+        newBlogPost.setCategory(body.category());
         newBlogPost.setCover("http://picsum.photos/200/300");
         return blogsRepository.save(newBlogPost);
     }
