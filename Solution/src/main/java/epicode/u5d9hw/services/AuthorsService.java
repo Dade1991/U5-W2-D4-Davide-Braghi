@@ -20,60 +20,61 @@ import java.io.IOException;
 
 @Service
 public class AuthorsService {
-	@Autowired
-	private Cloudinary cloudinaryUploader;
+    @Autowired
+    private Cloudinary cloudinaryUploader;
 
-	@Autowired
-	private MailgunSender emailSender;
-	@Autowired
-	private AuthorsRepository authorsRepository;
+    @Autowired
+    private MailgunSender emailSender;
+    @Autowired
+    private AuthorsRepository authorsRepository;
 
 
-	public Author save(NewAuthorDTO body) throws IOException {
-		authorsRepository.findByEmail(body.email()).ifPresent(user -> {
-			throw new BadRequestException("L'email " + body.email() + " è già stata utilizzata");
-		});
-		Author newAuthor = new Author();
-		newAuthor.setAvatar("https://ui-avatars.com/api/?name=" + body.name() + "+" + body.surname());
-		newAuthor.setName(body.name());
-		newAuthor.setEmail(body.email());
-		newAuthor.setSurname(body.surname());
-		newAuthor.setDateOfBirth(body.dateOfBirth());
-		emailSender.sendRegistrationEmail(newAuthor);
+    public Author save(NewAuthorDTO body) throws IOException {
+        authorsRepository.findByEmail(body.email()).ifPresent(user -> {
+            throw new BadRequestException("L'email " + body.email() + " è già stata utilizzata");
+        });
+        Author newAuthor = new Author();
+        newAuthor.setAvatar("https://ui-avatars.com/api/?name=" + body.name() + "+" + body.surname());
+        newAuthor.setName(body.name());
+        newAuthor.setEmail(body.email());
+        newAuthor.setSurname(body.surname());
+        newAuthor.setDateOfBirth(body.dateOfBirth());
+        emailSender.sendRegistrationEmail(newAuthor);
 
-		return authorsRepository.save(newAuthor);
-	}
+        return authorsRepository.save(newAuthor);
+    }
 
-	public Page<Author> getAuthors(int page, int size, String sort) {
+    public Page<Author> getAuthors(int page, int size, String sort) {
 
-		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
-		return authorsRepository.findAll(pageable);
-	}
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+        return authorsRepository.findAll(pageable);
+    }
 
-	public Author findById(int id) {
-		return authorsRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
-	}
+    public Author findById(int id) {
 
-	public void findByIdAndDelete(int id) {
-		Author found = this.findById(id);
-		authorsRepository.delete(found);
-	}
+        return authorsRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
+    }
 
-	public Author findByIdAndUpdate(int id, Author body) {
+    public void findByIdAndDelete(int id) {
+        Author found = this.findById(id);
+        authorsRepository.delete(found);
+    }
 
-		Author found = this.findById(id);
-		found.setEmail(body.getEmail());
-		found.setName(body.getName());
-		found.setSurname(body.getSurname());
-		found.setDateOfBirth(body.getDateOfBirth());
-		found.setAvatar(body.getAvatar());
-		return authorsRepository.save(found);
-	}
+    public Author findByIdAndUpdate(int id, Author body) {
 
-	public Author uploadAvatar(int id, MultipartFile file) throws IOException {
-		Author found = this.findById(id);
-		String avatarURL = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
-		found.setAvatar(avatarURL);
-		return authorsRepository.save(found);
-	}
+        Author found = this.findById(id);
+        found.setEmail(body.getEmail());
+        found.setName(body.getName());
+        found.setSurname(body.getSurname());
+        found.setDateOfBirth(body.getDateOfBirth());
+        found.setAvatar(body.getAvatar());
+        return authorsRepository.save(found);
+    }
+
+    public Author uploadAvatar(int id, MultipartFile file) throws IOException {
+        Author found = this.findById(id);
+        String avatarURL = (String) cloudinaryUploader.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        found.setAvatar(avatarURL);
+        return authorsRepository.save(found);
+    }
 }
